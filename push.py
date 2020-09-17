@@ -61,13 +61,13 @@ except ImportError:
 #############################################################################
 
 
-import datetime, xmlrpclib
+import datetime, xmlrpc.client
 import codecs
 import sys
 
 status = 'publish'
 
-server = xmlrpclib.ServerProxy(wp_url)
+server = xmlrpc.client.ServerProxy(wp_url)
 
 
 from subprocess import call
@@ -119,12 +119,12 @@ if m:
 
         post_id = server.wp.editPost(wp_blogid, wp_username, wp_password, post_id, data)
 
-        print "post update ",
+        print("post update "),
         if post_id:
-            print "successful."
+            print("successful.")
         else:
-            print "NOT successful."
+            print("NOT successful.")
             sys.exit(1)
 else:
-    print "No shortcode found in post %s."%post_id
-    print " Need  <!--zot_bib_web--> or <!--zot_bib_web COLLECTIONID--> or <!--zot_bib_web COLLECTIONID -->"
+    print("No shortcode found in post %s."%post_id)
+    print(" Need  <!--zot_bib_web--> or <!--zot_bib_web COLLECTIONID--> or <!--zot_bib_web COLLECTIONID -->")
