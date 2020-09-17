@@ -521,8 +521,8 @@ def generate_base_html():
 
     if smart_selections:
         jqready += """
-        jQuery(".bib-venue-short").each(function(){$(this).attr('data-before', $(this).html()); $(this).html("")});
-        jQuery(".blink a").each(function(){$(this).attr('data-before', $(this).html()); $(this).html("")});
+        jQuery(".bib-venue-short").each(function(){jQuery(this).attr('data-before', jQuery(this).html()); jQuery(this).html("")});
+        jQuery(".blink a").each(function(){jQuery(this).attr('data-before', jQuery(this).html()); jQuery(this).html("")});
         """
 
     if jquery_path:
