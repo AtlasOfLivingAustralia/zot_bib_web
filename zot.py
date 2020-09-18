@@ -610,7 +610,7 @@ changeCSS();
         if jquery_path:
             search_box = ''
             if show_search_box:
-                search_box += '<form id="pubSearchBox" name="pubSearchBox" style="visibility:hidden;"><input id="pubSearchInputBox" type="text" name="keyword" placeholder="keywords">&nbsp;<input id="pubSearchButton" type="button" value="Search" onClick="searchF()"></form><h2 id="searchTermSectionTitle" class="collectiontitle"></h2>'
+                search_box += '<form id="pubSearchBox" name="pubSearchBox" style="visibility:hidden;"><input id="pubSearchInputBox" type="text" name="keyword" placeholder="keywords"><input id="pubSearchButton" type="button" class="btn-primary-dark" value="Search" onClick="searchF()"></form><h2 id="searchTermSectionTitle" class="collectiontitle"></h2>'
 
             if show_search_box or show_shortcuts:
                 search_box += """<script type="text/javascript">
@@ -1581,7 +1581,7 @@ def make_html(all_items, exclude={}, shorten=False):
     SHORTEN the produced output for featured collections.
     """
 
-    def a_button(name, url=None, js=None, title=None, cls=None):
+    def a_button(name, url=None, js=None, title=None, cls=None, tabindex=None):
         global smart_selections
         global language_code
         js = ('onclick="%s"' % js) if js else ''
@@ -1589,10 +1589,11 @@ def make_html(all_items, exclude={}, shorten=False):
         url = ('href="%s"' % url) if url else ''
         cls = ('class="%s"' % cls) if cls else ''
         title = ('title="%s"' % title) if title else ''
+        tabindex = ('tabindex="%s"' % tabindex) if tabindex else ''
         if language_code in link_translations:
             name = link_translations[language_code].get(name.lower(), name)
-        return u"<a %s %s %s %s>%s</a>" % (
-            cls, title, url, js, (name if smart_selections else name))
+        return u"<a %s %s %s %s %s>%s</a>" % (
+            cls, title, url, js, tabindex, (name if smart_selections else name))
 
     def button_label_for_object(obj, default):
         if file_link_button_label:
@@ -1690,37 +1691,37 @@ def make_html(all_items, exclude={}, shorten=False):
                         sl = show.lower()
                         bi = ""
                         if 'abstract' == sl and abstract:
-                            bi = a_button('Abstract') + div('bibshowhide', div('abstract', abstract))
+                            bi = a_button('Abstract', cls='btn btn-outline-primary-dark', tabindex=0) + div('bibshowhide', div('abstract', abstract))
                         elif 'wikipedia' == sl and item.wikipedia:
-                            bi = a_button('Wikipedia') + div('bibshowhide', div('bib', item.wikipedia,
+                            bi = a_button('Wikipedia', cls='btn btn-outline-primary-dark', tabindex=0) + div('bibshowhide', div('bib', item.wikipedia,
                                                                                 style='white-space:pre-wrap;'))
                         elif 'bib' == sl and bibitem2:
-                            bi = a_button('BIB') + div('bibshowhide', div('bib', bibitem2))
+                            bi = a_button('BIB', cls='btn btn-outline-primary-dark', tabindex=0) + div('bibshowhide', div('bib', bibitem2))
                         elif 'file' == sl:
                             fil = sorted(filter(lambda x: x.saved_filename, item.attachments),
                                          key=lambda x: button_label_for_object(x.saved_filename, 'File'))
                             bi = u''
                             for a in fil:
                                 lab = button_label_for_object(a.saved_filename, 'File')
-                                bi += div('blink', a_button(lab, url=file_output_path + '/' + a.saved_filename))
+                                bi += div('blink', a_button(lab, url=file_output_path + '/' + a.saved_filename, cls='btn btn-outline-primary-dark', tabindex=0))
                         elif 'note' == sl:
                             for a in item.attachments:
                                 if a.itemType == 'note' and a.note:
-                                    bi += div('blink', a_button('Note') + div('bibshowhide', div('note', a.note)))
+                                    bi += div('blink', a_button('Note', cls='btn btn-outline-primary-dark', tabindex=0) + div('bibshowhide', div('note', a.note)))
                         elif (sl == 'pdf' or sl == 'url') and u:
                             # automatically detect what the link points to
                             n = button_label_for_object(u, 'link')
-                            bi = a_button(n, url=u)
+                            bi = a_button(n, url=u, cls='btn btn-outline-primary-dark', tabindex=0)
                         elif sl in ['ris', 'endnote'] and item.ris:
                             # to do - use a_button because of smart_selections
                             onclick = "dwnD(\'%s\');return false;" % base64.b64encode(item.ris.encode('utf-8')).decode(
                                 'utf-8')
                             bi = a_button('RIS' if 'ris' == sl else 'EndNote', js=onclick,
-                                          title='Download RIS/Endnote record')
+                                          title='Download RIS/Endnote record', cls='btn btn-outline-primary-dark', tabindex=0)
                         elif sl.startswith("cite."):
                             style = sl[5:]
                             if item.txtstyle and style in item.txtstyle:
-                                bi = a_button('%s' % style.upper()) + div('bibshowhide',
+                                bi = a_button('%s' % style.upper(), cls='btn btn-outline-primary-dark', tabindex=0) + div('bibshowhide',
                                                                           div('cite', item.txtstyle[style]))
                         else:
                             bi = str(sl)
