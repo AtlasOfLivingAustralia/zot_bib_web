@@ -1581,7 +1581,7 @@ def make_html(all_items, exclude={}, shorten=False):
     SHORTEN the produced output for featured collections.
     """
 
-    def a_button(name, url=None, js=None, title=None, cls=None, tabindex=None):
+    def a_button(name, url=None, js=None, title=None, cls=None, tabindex=0):
         global smart_selections
         global language_code
         js = ('onclick="%s"' % js) if js else ''
@@ -1589,7 +1589,7 @@ def make_html(all_items, exclude={}, shorten=False):
         url = ('href="%s"' % url) if url else ''
         cls = ('class="%s"' % cls) if cls else ''
         title = ('title="%s"' % title) if title else ''
-        tabindex = ('tabindex="%s"' % tabindex) if tabindex else ''
+        tabindex = 'tabindex="%d"' % tabindex
         if language_code in link_translations:
             name = link_translations[language_code].get(name.lower(), name)
         return u"<a %s %s %s %s %s>%s</a>" % (
