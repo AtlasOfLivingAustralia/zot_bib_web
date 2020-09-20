@@ -1691,37 +1691,37 @@ def make_html(all_items, exclude={}, shorten=False):
                         sl = show.lower()
                         bi = ""
                         if 'abstract' == sl and abstract:
-                            bi = a_button('Abstract', cls='btn btn-outline-primary-dark', tabindex=0) + div('bibshowhide', div('abstract', abstract))
+                            bi = a_button('Abstract', cls='btn btn-outline-dark', tabindex=0) + div('bibshowhide', div('abstract', abstract))
                         elif 'wikipedia' == sl and item.wikipedia:
-                            bi = a_button('Wikipedia', cls='btn btn-outline-primary-dark', tabindex=0) + div('bibshowhide', div('bib', item.wikipedia,
+                            bi = a_button('Wikipedia', cls='btn btn-outline-dark', tabindex=0) + div('bibshowhide', div('bib', item.wikipedia,
                                                                                 style='white-space:pre-wrap;'))
                         elif 'bib' == sl and bibitem2:
-                            bi = a_button('BIB', cls='btn btn-outline-primary-dark', tabindex=0) + div('bibshowhide', div('bib', bibitem2))
+                            bi = a_button('BIB', cls='btn btn-outline-dark', tabindex=0) + div('bibshowhide', div('bib', bibitem2))
                         elif 'file' == sl:
                             fil = sorted(filter(lambda x: x.saved_filename, item.attachments),
                                          key=lambda x: button_label_for_object(x.saved_filename, 'File'))
                             bi = u''
                             for a in fil:
                                 lab = button_label_for_object(a.saved_filename, 'File')
-                                bi += div('blink', a_button(lab, url=file_output_path + '/' + a.saved_filename, cls='btn btn-outline-primary-dark', tabindex=0))
+                                bi += div('blink', a_button(lab, url=file_output_path + '/' + a.saved_filename, cls='btn btn-outline-dark', tabindex=0))
                         elif 'note' == sl:
                             for a in item.attachments:
                                 if a.itemType == 'note' and a.note:
-                                    bi += div('blink', a_button('Note', cls='btn btn-outline-primary-dark', tabindex=0) + div('bibshowhide', div('note', a.note)))
+                                    bi += div('blink', a_button('Note', cls='btn btn-outline-dark', tabindex=0) + div('bibshowhide', div('note', a.note)))
                         elif (sl == 'pdf' or sl == 'url') and u:
                             # automatically detect what the link points to
                             n = button_label_for_object(u, 'link')
-                            bi = a_button(n, url=u, cls='btn btn-outline-primary-dark', tabindex=0)
+                            bi = a_button(n, url=u, cls='btn btn-outline-dark', tabindex=0)
                         elif sl in ['ris', 'endnote'] and item.ris:
                             # to do - use a_button because of smart_selections
                             onclick = "dwnD(\'%s\');return false;" % base64.b64encode(item.ris.encode('utf-8')).decode(
                                 'utf-8')
                             bi = a_button('RIS' if 'ris' == sl else 'EndNote', js=onclick,
-                                          title='Download RIS/Endnote record', cls='btn btn-outline-primary-dark', tabindex=0)
+                                          title='Download RIS/Endnote record', cls='btn btn-outline-dark', tabindex=0)
                         elif sl.startswith("cite."):
                             style = sl[5:]
                             if item.txtstyle and style in item.txtstyle:
-                                bi = a_button('%s' % style.upper(), cls='btn btn-outline-primary-dark', tabindex=0) + div('bibshowhide',
+                                bi = a_button('%s' % style.upper(), cls='btn btn-outline-dark', tabindex=0) + div('bibshowhide',
                                                                           div('cite', item.txtstyle[style]))
                         else:
                             bi = str(sl)
