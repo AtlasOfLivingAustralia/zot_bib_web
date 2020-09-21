@@ -65,6 +65,8 @@ copy_button_path = "site/clippy.svg" #: URL to clippy.svg on the server.
 
 show_search_box = True #: Show a search box
 
+general_citation_button_text = True #: if true, show "Citation" instead of "APA" etc on button
+
 #: List of shortcuts.
 #: Permissible values include the strings ``'collection', 'year', 'type', 'venue', and 'venue_short'``,
 #: or objects made with the function :func:`shortcut`.
@@ -1721,7 +1723,8 @@ def make_html(all_items, exclude={}, shorten=False):
                         elif sl.startswith("cite."):
                             style = sl[5:]
                             if item.txtstyle and style in item.txtstyle:
-                                bi = a_button('%s' % style.upper(), cls='btn btn-outline-dark', tabindex=0) + div('bibshowhide',
+                                button_label_for_citation = 'Citation' if general_citation_button_text else style.upper()
+                                bi = a_button('%s' % button_label_for_citation, cls='btn btn-outline-dark', tabindex=0) + div('bibshowhide',
                                                                           div('cite', item.txtstyle[style]))
                         else:
                             bi = str(sl)
