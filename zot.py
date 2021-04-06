@@ -164,16 +164,18 @@ sortkeyname_order['en'] = {}
 sortkeyname_order['en']['type'] = [
     ('journalArticle', 'Journal Articles'),
     ('archivalConferencePaper', 'Archival Conference Publications'),
-    ('conferencePaper', 'Conference and Workshop Papers'),
+    ('conferencePaper', 'Conference Papers'),
     ('book', 'Books'),
     ('bookSection', 'Book Chapters'),
     ('edited-volume', "Edited Volumes"),
     ('thesis', 'Theses'),
-    ('report', 'Tech Reports'),
-    ('attachment', 'Document'),
-    ('webpage', 'Web Site'),
-    ('presentation', 'Talks'),
-    ('computerProgram', 'Computer Programs')]
+    ('report', 'Reports'),
+    ('attachment', 'Documents'),
+    ('webpage', 'Web Sites'),
+    ('presentation', 'Presentations'),
+    ('computerProgram', 'Datasets'),
+    ('blogPost','Blog Posts'),
+    ('document','Other')]
 
 sortkeyname_order['en']['date'] = sortkeyname_order['en']['year'] = [
     (None, None),  # sort all other values here
